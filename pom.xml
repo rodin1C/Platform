@@ -11,6 +11,7 @@
         <module>protocol</module>
         <module>core</module>
         <module>data-source</module>
+        <module>accounting</module>
     </modules>
     <packaging>pom</packaging>
 
