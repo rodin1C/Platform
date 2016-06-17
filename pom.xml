@@ -12,6 +12,7 @@
         <module>core</module>
         <module>data-source</module>
         <module>accounting</module>
+        <module>web-client</module>
     </modules>
     <packaging>pom</packaging>
 
