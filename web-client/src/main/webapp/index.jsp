@@ -11,85 +11,101 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <link rel="icon" href="../../favicon.ico">
-
-
-  <link rel="stylesheet" href="<c:url value='/css/main.css'/>" type="text/css">
-
-  <script src="<c:url value='/js/jquery/jquery.js'/>"></script>
-  <script src="<c:url value='/js/jquery/jquery.tmpl.min.js'/>"></script>
-  <script src="<c:url value='/js/jquery/jquery.atmosphere.js'/>"></script>
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/poker.css" type="text/css">
 
 
 </head>
-<body>
-<div class="container">
-  <div id="header" class="prepend-1 span-22 append-1 last">
-    <h1 class="loud">Welcome to Spring Web MVC - Atmosphere Sample</h1>
-    <h4>
-      Code: <a href="https://github.com/ghillert/spring-asynchttp-examples">https://github.com/ghillert/spring-atmosphere-samples</a>
-    </h4>
-  </div>
-  <div id="status" class="prepend-1 span-17 last" style="background-color: #FFFFDD;">
-    Status Messages will appear here...
-  </div>
-  <div id="content" class="prepend-1 span-17 prepend-top last">
-    <input id="message-field" type="text" size="40" value="Send a tweet to connected clients" /> <input id="message-button" type="button" value="Send" />
-    <ul id="twitterMessages">
-      <li id="placeHolder">Searching...</li>
-    </ul>
-  </div>
-  <div id="stats" class="prepend-1 span-4 append-1 prepend-top last">
-    <table id="asynchHttpStats">
-      <caption>AsynchHttp Stats</caption>
-      <thead>
-      <tr>
-        <th></th>
-        <th></th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td>Protocol</td>
-        <td id="transportType">N/A</td>
-      </tr>
-      </tbody>
-    </table>
-    <table id="chartableStats">
-      <caption>Stats</caption>
-      <thead>
-      <tr>
-        <th scope="col"></th>
-        <th scope="col"></th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <th scope="row" style="color: #1751A7"># of Messages</th>
-        <td id="numberOfCallbackInvocations">0</td>
-      </tr>
-      <tr>
-        <th scope="row" style="color: #8AA717"># Tweets</th>
-        <td id="numberOfTweets">0</td>
-      </tr>
-      <tr>
-        <th scope="row" style="color: #A74217"># Errors</th>
-        <td id="numberOfErrors">0</td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
 
-<script id="tweet-template" type="text/x-handlebars-template">
-  {{#each tweets}}
-  {{#with this}}
-  <li>
-    <img alt='{{fromUser}}' title='{{fromUser}}' src='{{profileImageUrl}}' width='48' height='48'>
-    <div>{{text}}</div>
-  </li>
-  {{/with}}
-  {{/each}}
-</script>
+<body>
+  <%--<div class="container">--%>
+  <%--<div id="header" class="prepend-1 span-22 append-1 last">--%>
+    <%--<h1 class="loud">Welcome to Spring Web MVC - Atmosphere Sample</h1>--%>
+    <%--<h4>--%>
+      <%--Code: <a href="https://github.com/ghillert/spring-asynchttp-examples">https://github.com/ghillert/spring-atmosphere-samples</a>--%>
+    <%--</h4>--%>
+  <%--</div>--%>
+  <%--<div id="status" class="prepend-1 span-17 last" style="background-color: #FFFFDD;">--%>
+    <%--Status Messages will appear here...--%>
+  <%--</div>--%>
+  <%--<div id="content" class="prepend-1 span-17 prepend-top last">--%>
+    <%--<input id="message-field" type="text" size="40" value="Send a tweet to connected clients" /> <input id="message-button" type="button" value="Send" />--%>
+    <%--<ul id="twitterMessages">--%>
+      <%--<li id="placeHolder">Searching...</li>--%>
+    <%--</ul>--%>
+  <%--</div>--%>
+  <%--<div id="stats" class="prepend-1 span-4 append-1 prepend-top last">--%>
+    <%--<table id="asynchHttpStats">--%>
+      <%--<caption>AsynchHttp Stats</caption>--%>
+      <%--<thead>--%>
+      <%--<tr>--%>
+        <%--<th></th>--%>
+        <%--<th></th>--%>
+      <%--</tr>--%>
+      <%--</thead>--%>
+      <%--<tbody>--%>
+      <%--<tr>--%>
+        <%--<td>Protocol</td>--%>
+        <%--<td id="transportType">N/A</td>--%>
+      <%--</tr>--%>
+      <%--</tbody>--%>
+    <%--</table>--%>
+    <%--<table id="chartableStats">--%>
+      <%--<caption>Stats</caption>--%>
+      <%--<thead>--%>
+      <%--<tr>--%>
+        <%--<th scope="col"></th>--%>
+        <%--<th scope="col"></th>--%>
+      <%--</tr>--%>
+      <%--</thead>--%>
+      <%--<tbody>--%>
+      <%--<tr>--%>
+        <%--<th scope="row" style="color: #1751A7"># of Messages</th>--%>
+        <%--<td id="numberOfCallbackInvocations">0</td>--%>
+      <%--</tr>--%>
+      <%--<tr>--%>
+        <%--<th scope="row" style="color: #8AA717"># Tweets</th>--%>
+        <%--<td id="numberOfTweets">0</td>--%>
+      <%--</tr>--%>
+      <%--<tr>--%>
+        <%--<th scope="row" style="color: #A74217"># Errors</th>--%>
+        <%--<td id="numberOfErrors">0</td>--%>
+      <%--</tr>--%>
+      <%--</tbody>--%>
+    <%--</table>--%>
+  <%--</div>--%>
+<%--</div>--%>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Project name</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <div class="starter-template">
+      <h1>Bootstrap starter template</h1>
+      <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+    </div>
+
+  </div>
 
 <script type="text/javascript">
 
@@ -255,5 +271,9 @@
     });
   });
 </script>
+
+  <script src="resource/js/bootstrap.min.js"></script>
+  <script src="resource/js/jquery/jquery.atmosphere.js"></script>
+  <script src="resource/js/jquery/jquery.js"></script>
 </body>
 </html>
