@@ -14,69 +14,13 @@
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/bootstrap.min.css" type="text/css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/poker.css" type="text/css">
-
+  <script src="${pageContext.request.contextPath}/resource/js/jquery/jquery-1.12.4.js"></script>
+  <script src="${pageContext.request.contextPath}/resource/js/bootstrap.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resource/js/jquery/jquery.atmosphere.js"></script>
 
 </head>
 
 <body>
-  <%--<div class="container">--%>
-  <%--<div id="header" class="prepend-1 span-22 append-1 last">--%>
-    <%--<h1 class="loud">Welcome to Spring Web MVC - Atmosphere Sample</h1>--%>
-    <%--<h4>--%>
-      <%--Code: <a href="https://github.com/ghillert/spring-asynchttp-examples">https://github.com/ghillert/spring-atmosphere-samples</a>--%>
-    <%--</h4>--%>
-  <%--</div>--%>
-  <%--<div id="status" class="prepend-1 span-17 last" style="background-color: #FFFFDD;">--%>
-    <%--Status Messages will appear here...--%>
-  <%--</div>--%>
-  <%--<div id="content" class="prepend-1 span-17 prepend-top last">--%>
-    <%--<input id="message-field" type="text" size="40" value="Send a tweet to connected clients" /> <input id="message-button" type="button" value="Send" />--%>
-    <%--<ul id="twitterMessages">--%>
-      <%--<li id="placeHolder">Searching...</li>--%>
-    <%--</ul>--%>
-  <%--</div>--%>
-  <%--<div id="stats" class="prepend-1 span-4 append-1 prepend-top last">--%>
-    <%--<table id="asynchHttpStats">--%>
-      <%--<caption>AsynchHttp Stats</caption>--%>
-      <%--<thead>--%>
-      <%--<tr>--%>
-        <%--<th></th>--%>
-        <%--<th></th>--%>
-      <%--</tr>--%>
-      <%--</thead>--%>
-      <%--<tbody>--%>
-      <%--<tr>--%>
-        <%--<td>Protocol</td>--%>
-        <%--<td id="transportType">N/A</td>--%>
-      <%--</tr>--%>
-      <%--</tbody>--%>
-    <%--</table>--%>
-    <%--<table id="chartableStats">--%>
-      <%--<caption>Stats</caption>--%>
-      <%--<thead>--%>
-      <%--<tr>--%>
-        <%--<th scope="col"></th>--%>
-        <%--<th scope="col"></th>--%>
-      <%--</tr>--%>
-      <%--</thead>--%>
-      <%--<tbody>--%>
-      <%--<tr>--%>
-        <%--<th scope="row" style="color: #1751A7"># of Messages</th>--%>
-        <%--<td id="numberOfCallbackInvocations">0</td>--%>
-      <%--</tr>--%>
-      <%--<tr>--%>
-        <%--<th scope="row" style="color: #8AA717"># Tweets</th>--%>
-        <%--<td id="numberOfTweets">0</td>--%>
-      <%--</tr>--%>
-      <%--<tr>--%>
-        <%--<th scope="row" style="color: #A74217"># Errors</th>--%>
-        <%--<td id="numberOfErrors">0</td>--%>
-      <%--</tr>--%>
-      <%--</tbody>--%>
-    <%--</table>--%>
-  <%--</div>--%>
-<%--</div>--%>
-
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
@@ -103,6 +47,7 @@
     <div class="starter-template">
       <h1>Bootstrap starter template</h1>
       <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+      <p><input type="button" value="Connect to Websocket..." onclick="onClick()"></p>
     </div>
 
   </div>
@@ -114,19 +59,6 @@
     if (!window.console) {
       console = {log: function() {}};
     }
-
-    var StatusMessage = Backbone.Model.extend({
-    });
-
-    var TwitterMessage = Backbone.Model.extend({
-    });
-
-    var TwitterMessages = Backbone.Collection.extend({
-      model: TwitterMessage
-    });
-
-    var source = $("#tweet-template").html();
-    var tweetTemplate = Handlebars.compile(source);
 
     var asyncHttpStatistics = {
       transportType: 'N/A',
@@ -219,9 +151,6 @@
       var context = {
         tweets : data.toJSON()
       };
-      var html = tweetTemplate(context);
-
-      $(html).hide().prependTo( "#twitterMessages").fadeIn();
 
     }
 
@@ -230,10 +159,12 @@
       $('#status').html(data.get('message'));
     }
 
+
+
     var socket = $.atmosphere;
     var subSocket;
     var transport = 'websocket';
-    var websocketUrl = "${fn:replace(r.requestURL, r.requestURI, '')}${r.contextPath}/websockets/";
+    var websocketUrl = "localhost:24333";
 
     var request = {
       url: websocketUrl,
@@ -267,13 +198,17 @@
     subSocket = socket.subscribe(request);
 
     $('#message-button').click(function() {
-      subSocket.push($('#message-field').val());
+      subSocket.push('Hello');
     });
+
+    function onClick() {
+      console.log("Open Websocket connection...");
+      subSocket.push('Hello');
+    }
+
   });
 </script>
 
-  <script src="resource/js/bootstrap.min.js"></script>
-  <script src="resource/js/jquery/jquery.atmosphere.js"></script>
-  <script src="resource/js/jquery/jquery.js"></script>
+
 </body>
 </html>
