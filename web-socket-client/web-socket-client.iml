@@ -11,13 +11,12 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="protocol" />
+    <orderEntry type="library" name="Maven: io.netty:netty:3.10.3.Final" level="project" />
     <orderEntry type="library" name="Maven: com.typesafe.akka:akka-actor_2.11:2.4-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.scala-lang:scala-library:2.11.7" level="project" />
     <orderEntry type="library" name="Maven: com.typesafe:config:1.3.0" level="project" />
     <orderEntry type="library" name="Maven: com.typesafe.akka:akka-remote_2.11:2.4-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: com.typesafe.akka:akka-protobuf_2.11:2.4-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: io.netty:netty:3.10.3.Final" level="project" />
     <orderEntry type="library" name="Maven: org.uncommons.maths:uncommons-maths:1.2.2a" level="project" />
     <orderEntry type="library" name="Maven: com.typesafe.akka:akka-cluster_2.11:2.4-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.9" level="project" />
