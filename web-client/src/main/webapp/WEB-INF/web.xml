@@ -43,7 +43,7 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:context/root-config.xml</param-value>
+        <param-value>classpath:context/application-context.xml</param-value>
     </context-param>
 
     <servlet>
