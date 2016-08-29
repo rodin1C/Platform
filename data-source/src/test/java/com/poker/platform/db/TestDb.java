@@ -4,7 +4,6 @@ package com.poker.platform.db;
 import com.poker.platform.model.Casino;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +13,7 @@ import javax.persistence.PersistenceContext;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath*:dataSource-test.xml")
+@Transactional
 public class TestDb {
 
     @PersistenceContext
@@ -21,7 +21,6 @@ public class TestDb {
 
 
     @Test
-    @Transactional
     public void test() {
         Casino casino = new Casino();
         casino.setName("Test");
