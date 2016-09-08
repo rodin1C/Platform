@@ -12,7 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath*:dataSource-test.xml")
+@ContextConfiguration("classpath*:dataSource-config.xml")
 @Transactional
 public class TestDb {
 
