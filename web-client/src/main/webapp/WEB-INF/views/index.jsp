@@ -13,13 +13,13 @@
   <meta name="author" content="">
   <link rel="icon" href="../../favicon.ico">
   <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/bootstrap.min.css" type="text/css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/poker.css" type="text/css">
-  <script src="${pageContext.request.contextPath}/resource/js/jquery/jquery-1.12.4.js"></script>
-  <script src="${pageContext.request.contextPath}/resource/js/bootstrap/bootstrap.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resource/js/angular/angular.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resource/js/angular/angular-resource.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resource/js/angular/angular-route.min.js"></script>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/poker.css" type="text/css">
+  <script src="${pageContext.request.contextPath}/resources/js/jquery/jquery-1.12.4.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/bootstrap/bootstrap.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/angular/angular.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/angular/angular-resource.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/angular/angular-route.min.js"></script>
 
 </head>
 
