@@ -44,6 +44,8 @@
         <property name="maxUploadSize" value="1000000"/>
     </bean>
 
+    <bean id="springSecurityFilterChain" class="com.poker.platform.filter.AuthFilter"/>
+
     <mvc:view-controller path="/" view-name="/index"/>
 
     <mvc:resources mapping="/resources/**" location="/resources/" />
