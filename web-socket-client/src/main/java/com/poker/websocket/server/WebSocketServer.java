@@ -1,6 +1,11 @@
 package com.poker.websocket.server;
 
 
+import akka.actor.ActorRef;
+import akka.actor.ActorSystem;
+import akka.actor.Props;
+import com.poker.platform.channel.actors.PingPongActor;
+import com.poker.websocket.session.SessionManagerActor;
 import org.jboss.netty.bootstrap.ServerBootstrap;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
 import org.jboss.netty.handler.ssl.SslContext;
@@ -16,6 +21,9 @@ public class WebSocketServer {
     static final int PORT = Integer.parseInt(System.getProperty("port", SSL ? "8443" : "8080"));
 
     public static void main(String[] args) throws SSLException, CertificateException {
+
+        ActorApp.app.actorOf(Props.create(SessionManagerActor.class), "ws-session-manager");
+
         final SslContext sslCtx;
         if (SSL) {
             SelfSignedCertificate ssc = new SelfSignedCertificate();

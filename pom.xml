@@ -15,6 +15,7 @@
         <module>web-client</module>
         <module>web-socket-client</module>
         <module>model</module>
+        <module>internal-message</module>
     </modules>
     <packaging>pom</packaging>
 
