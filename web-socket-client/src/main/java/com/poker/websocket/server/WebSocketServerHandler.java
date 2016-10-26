@@ -1,6 +1,9 @@
 package com.poker.websocket.server;
 
 
+import akka.actor.ActorRef;
+import akka.actor.ActorSystem;
+import com.poker.platform.message.BasicMessage;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.jboss.netty.channel.*;
@@ -20,8 +23,12 @@ import static org.jboss.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
 public class WebSocketServerHandler extends SimpleChannelUpstreamHandler {
     private static final String WEBSOCKET_PATH = "/websocket";
-
+    private final ActorSystem actorSystem;
     private WebSocketServerHandshaker handshaker;
+
+    public WebSocketServerHandler(ActorSystem actorSystem) {
+        this.actorSystem = actorSystem;
+    }
 
     @Override
     public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {
@@ -67,7 +74,7 @@ public class WebSocketServerHandler extends SimpleChannelUpstreamHandler {
             wsFactory.sendUnsupportedWebSocketVersionResponse(ctx.getChannel());
         } else {
             handshaker.handshake(ctx.getChannel(), req).addListener(WebSocketServerHandshaker.HANDSHAKE_LISTENER);
-            WebSocketSessionManager.addSession(ctx.getChannel());
+            WebSocketSessionManager.addSession(actorSystem, ctx.getChannel());
         }
     }
 
@@ -81,14 +88,23 @@ public class WebSocketServerHandler extends SimpleChannelUpstreamHandler {
             ctx.getChannel().write(new PongWebSocketFrame(frame.getBinaryData()));
             return;
         }
-        if (!(frame instanceof TextWebSocketFrame)) {
+        if (!(frame instanceof TextWebSocketFrame) && !(frame instanceof PongWebSocketFrame)) {
             throw new UnsupportedOperationException(
                     String.format("%s frame types not supported", frame.getClass().getName()));
+        }
+
+        if (frame instanceof PongWebSocketFrame) {
+            System.out.println("Receive pong");
+            return;
         }
 
         // Send the uppercase string back.
         String request = ((TextWebSocketFrame) frame).getText();
         System.err.println(String.format("Channel %s received %s", ctx.getChannel().getId(), request));
+
+        ActorRef managerActor = actorSystem.actorFor("akka://poker/user/ws-session-manager");
+        managerActor.tell(new BasicMessage<String>(ctx.getChannel().getId(), request), ActorRef.noSender());
+
         ctx.getChannel().write(new TextWebSocketFrame(request.toUpperCase()));
         String resp = request.toUpperCase() + request.toUpperCase();
         for (int i = 0; i < 10; i++) {

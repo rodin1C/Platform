@@ -1,6 +1,7 @@
 package com.poker.websocket.server;
 
 import akka.actor.ActorRef;
+import akka.actor.ActorSystem;
 import akka.actor.Props;
 import com.poker.platform.message.CreateUserSession;
 import com.poker.websocket.session.SessionManagerActor;
@@ -16,8 +17,9 @@ public final class WebSocketSessionManager {
     private WebSocketSessionManager() {
     }
 
-    public static void addSession(Channel channel) {
-        ActorApp.app.actorFor("ws-session-manager").tell(new CreateUserSession(channel, "Test"), ActorRef.noSender());
+    public static void addSession(ActorSystem app, Channel channel) {
+        ActorRef actorRef = app.actorFor("akka://poker/user/ws-session-manager");
+        actorRef.tell(new CreateUserSession(channel, "Test"), ActorRef.noSender());
         System.out.println(" Created session id: " + channel.getId());
 //        sessionMap.putIfAbsent(channel.getId(), channel);
     }
@@ -27,6 +29,7 @@ public final class WebSocketSessionManager {
     }
 
     public static void broadcast(String message) {
+//        ActorRef actorRef = app.actorFor("akka://poker/user/ws-session-manager");
 //        for (Map.Entry<Integer, Channel> entry : sessionMap.entrySet()) {
 //            System.out.println("Broadcasting to: " + entry.getKey() + " message: " + message);
 //            entry.getValue().write(new TextWebSocketFrame(message));

@@ -1,8 +1,10 @@
 package com.poker.platform.channel.session;
 
 import akka.actor.UntypedActor;
+import com.poker.platform.message.CreateUserSession;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelFuture;
+import org.jboss.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 
 public class UserSession extends UntypedActor{
     private final Channel channel;
@@ -15,7 +17,15 @@ public class UserSession extends UntypedActor{
 
     @Override
     public void onReceive(Object message) throws Exception {
-        ChannelFuture future = channel.write(message);
+        if (message instanceof CreateUserSession) {
+            System.out.println("UserSession income msg [CreateUserSession] " + message.toString());
+        }
+        ChannelFuture future = channel.write(new TextWebSocketFrame("Hello@@@@"));
+        if (future.isSuccess()) {
+            System.out.println("Success");
+        } else {
+            System.out.println("Fail");
+        }
 
     }
 

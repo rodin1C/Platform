@@ -2,9 +2,15 @@ package com.poker.platform.message;
 
 import org.jboss.netty.channel.Channel;
 
-public class CreateUserSession {
-    private final Channel channel;
-    private final String userName;
+import java.io.Serializable;
+
+public class CreateUserSession implements Serializable{
+    private static final long serialVersionUID = 1L;
+    private Channel channel;
+    private String userName;
+
+    public CreateUserSession() {
+    }
 
     public CreateUserSession(Channel channel, String userName) {
         this.channel = channel;
